@@ -1,6 +1,7 @@
 /* Global Styles */
 :root {
   --purple: #9146ff;
+  --dark-purple: #7c3ade;
 }
 
 html,
@@ -38,13 +39,32 @@ body {
   opacity: 80%;
 }
 
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Dark Mode Button */
 #darkModeToggle {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--dark-purple);
+  border: none;
+  outline: none;
+  border-radius: 8px;
   transition: background 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  background-color: white;
+  color: var(--purple) !important;
 }
 
 /* Hero Section */
@@ -82,26 +102,25 @@ h2 {
   color: var(--purple);
 }
 
-.warning {
-  background-color: yellow;
-  color: #121212;
-  border-color: #edd900;
+.box {
   border-style: solid;
   border-width: 1px;
   border-radius: 8px;
   font-size: 0.9rem;
   padding: 8px;
+  overflow: hidden;
+}
+
+.warning {
+  background-color: yellow;
+  color: #121212;
+  border-color: #edd900;
 }
 
 .info {
   background-color: lightblue;
   color: darkcyan;
   border-color: lightskyblue;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  padding: 8px;
 }
 
 .btn:disabled,
@@ -163,20 +182,9 @@ footer {
   color: #ffffff;
 }
 
-/* Dark Mode Button */
-#darkModeToggle {
-  border-radius: 5px;
-  padding: 8px 12px;
-}
-
-#darkModeToggle:hover {
-  color: var(--purple);
-}
-
 /* Back to Top Button */
 #backToTop {
-  border-radius: 5px;
-  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 @media (min-width: 992px) {
@@ -188,6 +196,10 @@ footer {
 @media (max-width: 991px) {
   .hero-section {
     text-align: center;
+  }
+
+  .info {
+    font-size: 0.55rem;
   }
 
   /* Light mode border */

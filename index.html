@@ -41,7 +41,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <i class="fas fa-bars fa-sm" style="color: white"></i>
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto">
@@ -52,8 +52,8 @@
               <a class="nav-link text-white" href="#refresh">Refresh Token</a>
             </li>
           </ul>
-          <button id="darkModeToggle" class="btn btn-outline-light">
-            <i id="darkModeIcon" class="fas fa-moon"></i>
+          <button id="darkModeToggle" class="btn text-white">
+            <i id="darkModeIcon" class="fas fa-moon fa-sm"></i>
           </button>
         </div>
       </div>
@@ -87,7 +87,7 @@
         <div class="row align-items-center">
           <div class="col-md-6">
             <h2>Generate Token</h2>
-            <p class="warning">
+            <p class="warning box">
               <i
                 class="fa-solid fa-triangle-exclamation"
                 style="color: darkorange; margin-right: 5px"
@@ -134,13 +134,12 @@
               Provide your Refresh token which you received earlier to refresh
               your Access token.
             </p>
-            <p class="info">
+            <p class="info box">
               <i
                 class="fa-solid fa-circle-info"
                 style="color: darkcyan; margin-right: 5px"
               ></i>
-              You can use this API too:
-              <strong
+              API:<strong
                 >https://api.twitchtokentool.click/refresh/YOUR_REFRESH_TOKEN</strong
               >
             </p>
