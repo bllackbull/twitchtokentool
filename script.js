@@ -75,19 +75,19 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 });
 
+const redirectUri = "https://twitchtokentool.click";
+
 // Generate Token
 generateBtn.addEventListener("click", function () {
   const clientId = document.querySelector(".client-id").value;
-  const redirectUri = encodeURIComponent(
-    window.location.origin + window.location.pathname
-  );
+  const encodedRedirectUri = encodeURIComponent(window.location.origin);
 
   if (!clientId) {
     alert("Please enter a Client ID.");
     return;
   }
 
-  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodedRedirectUri}&response_type=code`;
 
   window.location.href = authUrl;
 });
@@ -95,7 +95,6 @@ generateBtn.addEventListener("click", function () {
 async function generateToken(code) {
   const clientId = document.querySelector(".client-id").value;
   const clientSecret = document.querySelector(".client-secret").value;
-  const redirectUri = window.location.origin + window.location.pathname;
 
   if (!clientId || !clientSecret) {
     alert("Please enter both Client ID and Client Secret.");
