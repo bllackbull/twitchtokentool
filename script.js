@@ -96,6 +96,8 @@ async function generateToken(code) {
   const clientId = document.querySelector(".client-id").value;
   const clientSecret = document.querySelector(".client-secret").value;
 
+  console.log(clientSecret);
+
   if (!clientId || !clientSecret) {
     alert("Please enter both Client ID and Client Secret.");
     return;
