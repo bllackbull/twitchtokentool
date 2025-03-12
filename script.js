@@ -76,10 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const redirectUri = "https://twitchtokentool.click";
+let clientId = null;
+let clientSecret = null;
 
 // Generate Token
 generateBtn.addEventListener("click", function () {
-  const clientId = document.querySelector(".client-id").value;
+  clientId = document.querySelector(".client-id").value;
+  clientSecret = document.querySelector(".client-secret").value;
   const encodedRedirectUri = encodeURIComponent(window.location.origin);
 
   if (!clientId) {
@@ -93,11 +96,6 @@ generateBtn.addEventListener("click", function () {
 });
 
 async function generateToken(code) {
-  const clientId = document.querySelector(".client-id").value;
-  const clientSecret = document.querySelector(".client-secret").value;
-
-  console.log(clientSecret);
-
   if (!clientId || !clientSecret) {
     alert("Please enter both Client ID and Client Secret.");
     return;
