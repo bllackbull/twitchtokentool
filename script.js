@@ -124,7 +124,7 @@ async function generateToken(code) {
     const data = await response.json();
     const dataString = `- Access Token: ${data.access_token}\n- Refresh Token: ${data.refresh_token}`;
 
-    const message = `✅ Successfully Generated!\n${dataString}`;
+    const message = `✅ Successfully Generated!\n${dataString}\nClick OK to copy to clipboard.`;
 
     if (confirm(message)) {
       await navigator.clipboard.writeText(dataString);
@@ -171,7 +171,10 @@ refreshBtn.addEventListener("click", async function () {
         ? `\n- New Refresh Token: ${data.refresh_token}`
         : "";
 
-    const message = `✅ Access Token Refreshed!\n` + dataString;
+    const message =
+      `✅ Access Token Refreshed!\n` +
+      dataString +
+      "Click OK to copy to clipboard.";
 
     if (confirm(message)) {
       await navigator.clipboard.writeText(message);
