@@ -122,10 +122,14 @@ async function generateToken(code) {
     });
 
     const data = await response.json();
+    const dataString = `- Access Token: ${data.access_token}\n- Refresh Token: ${data.refresh_token}`;
 
-    alert(
-      `✅ Successfully Generated!\n- Access Token: ${data.access_token}\n- Refresh Token: ${data.refresh_token}`
-    );
+    const message = `✅ Successfully Generated!\n${dataString}`;
+
+    if (confirm(message)) {
+      await navigator.clipboard.writeText(dataString);
+      alert("📋 Access Token copied to clipboard!");
+    }
 
     localStorage.removeItem("clientId");
     localStorage.removeItem("clientSecret");
@@ -162,15 +166,16 @@ refreshBtn.addEventListener("click", async function () {
 
     const data = await response.json();
 
-    if (data.access_token) {
-      alert(
-        `✅ Access Token Refreshed!\n- New Access Token: ${data.access_token}` +
-          data.refresh_token
-          ? `\n- New Refresh Token: ${data.refresh_token}`
-          : ""
-      );
-    } else {
-      alert("❌ Failed to refresh your token! Please try again later.");
+    const dataString =
+      `- New Access Token: ${data.access_token}` + data.refresh_token
+        ? `\n- New Refresh Token: ${data.refresh_token}`
+        : "";
+
+    const message = `✅ Access Token Refreshed!\n` + dataString;
+
+    if (confirm(message)) {
+      await navigator.clipboard.writeText(message);
+      alert("📋 Access Token copied to clipboard!");
     }
   } catch (error) {
     alert("❌ Error connecting to server.");
