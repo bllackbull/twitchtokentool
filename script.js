@@ -76,28 +76,32 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const redirectUri = "https://twitchtokentool.click";
-let clientId = null;
-let clientSecret = null;
 
 // Generate Token
 generateBtn.addEventListener("click", function () {
-  clientId = document.querySelector(".client-id").value;
-  clientSecret = document.querySelector(".client-secret").value;
-  const encodedRedirectUri = encodeURIComponent(window.location.origin);
+  const clientId = document.querySelector(".client-id").value;
+  const clientSecret = document.querySelector(".client-secret").value;
 
-  if (!clientId) {
-    alert("Please enter a Client ID.");
+  if (!clientId || !clientSecret) {
+    alert("⚠️ Please enter both Client ID and Client Secret.");
     return;
   }
 
+  localStorage.setItem("clientId", clientId);
+  localStorage.setItem("clientSecret", clientSecret);
+
+  const encodedRedirectUri = encodeURIComponent(window.location.origin);
   const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodedRedirectUri}&response_type=code`;
 
   window.location.href = authUrl;
 });
 
 async function generateToken(code) {
+  const clientId = localStorage.getItem("clientId");
+  const clientSecret = localStorage.getItem("clientSecret");
+
   if (!clientId || !clientSecret) {
-    alert("Please enter both Client ID and Client Secret.");
+    alert("⚠️ Please enter both Client ID and Client Secret.");
     return;
   }
 
@@ -122,6 +126,9 @@ async function generateToken(code) {
     alert(
       `✅ Successfully Generated!\n- Access Token: ${data.access_token}\n- Refresh Token: ${data.refresh_token}`
     );
+
+    localStorage.removeItem("clientId");
+    localStorage.removeItem("clientSecret");
   } catch (error) {
     console.error("Error fetching token:", error);
 
@@ -142,7 +149,7 @@ refreshBtn.addEventListener("click", async function () {
   const refreshToken = document.querySelector(".client-refresh").value;
 
   if (!refreshToken) {
-    alert("❌ Please enter a refresh token.");
+    alert("⚠️ Please enter a refresh token.");
     return;
   }
 
