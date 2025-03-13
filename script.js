@@ -128,7 +128,7 @@ async function generateToken(code) {
 
     if (confirm(message)) {
       await navigator.clipboard.writeText(dataString);
-      alert("📋 Access Token copied to clipboard!");
+      alert("📋 Text copied to clipboard!");
     }
 
     localStorage.removeItem("clientId");
@@ -178,7 +178,7 @@ refreshBtn.addEventListener("click", async function () {
 
     if (confirm(message)) {
       await navigator.clipboard.writeText(message);
-      alert("📋 Access Token copied to clipboard!");
+      alert("📋 Text copied to clipboard!");
     }
   } catch (error) {
     alert("❌ Error connecting to server.");
