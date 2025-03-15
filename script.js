@@ -182,5 +182,6 @@ refreshBtn.addEventListener("click", async function () {
     }
   } catch (error) {
     alert("❌ Error connecting to server.");
+    console.log(error);
   }
 });
