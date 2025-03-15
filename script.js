@@ -176,18 +176,15 @@ refreshBtn.addEventListener("click", async function () {
 
     const data = await response.json();
 
-    const dataString =
-      `- New Access Token: ${data.access_token}` + data.refresh_token
-        ? `\n- New Refresh Token: ${data.refresh_token}`
-        : "";
+    const dataString = `- New Access Token: ${data.access_token}\n- New Refresh Token: ${data.refresh_token}`;
 
     const message =
       `✅ Access Token Refreshed!\n` +
       dataString +
-      "Click OK to copy to clipboard.";
+      "\nClick OK to copy to clipboard.";
 
     if (confirm(message)) {
-      await navigator.clipboard.writeText(message);
+      await navigator.clipboard.writeText(dataString);
       alert("📋 Text copied to clipboard!");
     }
   } catch (error) {
