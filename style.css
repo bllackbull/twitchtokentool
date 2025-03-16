@@ -158,7 +158,8 @@ footer {
 
 /* Dark Mode */
 .dark-mode,
-.dark-mode #refresh {
+.dark-mode #refresh,
+.dark-mode #tokenModal {
   background-color: #121212;
   color: #ffffff;
 }

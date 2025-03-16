@@ -238,7 +238,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="tokenModalLabel">Token Details</h5>
+            <h2 class="modal-title" id="tokenModalLabel">Token Details</h2>
             <button
               type="button"
               class="btn-close"
@@ -249,7 +249,7 @@
           <div class="modal-body">
             <p id="modalDescription">Your tokens are generated successfully.</p>
 
-            <label for="accessToken" class="form-label">Access Token</label>
+            <label for="accessToken" class="form-label">Access Token :</label>
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -257,15 +257,12 @@
                 class="form-control"
                 readonly
               />
-              <button
-                class="btn btn-outline-primary copy-btn"
-                data-target="accessToken"
-              >
+              <button class="btn primary copy-btn" data-target="accessToken">
                 Copy
               </button>
             </div>
 
-            <label for="refreshToken" class="form-label">Refresh Token</label>
+            <label for="refreshToken" class="form-label">Refresh Token :</label>
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -273,10 +270,7 @@
                 class="form-control"
                 readonly
               />
-              <button
-                class="btn btn-outline-primary copy-btn"
-                data-target="refreshToken"
-              >
+              <button class="btn primary copy-btn" data-target="refreshToken">
                 Copy
               </button>
             </div>
@@ -285,7 +279,7 @@
             <button
               type="button"
               id="doneButton"
-              class="btn btn-success"
+              class="btn primary text-white"
               disabled
             >
               Done
