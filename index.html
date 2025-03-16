@@ -3,12 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="theme-color"
+      content="#9146FF"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#9146FF"
+      media="(prefers-color-scheme: dark)"
+    />
     <title>Twitch Token Tool</title>
     <meta
       name="description"
       content="Easily generate Twitch OAuth Access Token and Refresh Token with custom scopes."
     />
-    <link rel="icon" href="./images/icon.png" type="image" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/icons/favicon-16x16.png"
+    />
     <!-- FontAwesome for Icons -->
     <link
       rel="stylesheet"
@@ -26,6 +52,46 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./style.css" />
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Twitch Token Tool",
+        "url": "https://twitchtokentool.click/",
+        "description": "Easily generate Twitch OAuth Access Token and Refresh Token with custom scopes.",
+        "image": "https://twitchtokentool.click/images/icons/favicon-16x16.png",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://twitchtokentool.click/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Twitch Token Tool" />
+    <meta
+      property="og:description"
+      content="Easily generate Twitch OAuth Access Token and Refresh Token with custom scopes."
+    />
+    <meta
+      property="og:image"
+      content="https://twitchtokentool.click/images/icons/favicon-16x16.png"
+    />
+    <meta property="og:url" content="https://twitchtokentool.click/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Twitch Token Tool" />
+    <meta
+      name="twitter:description"
+      content="Easily generate Twitch OAuth Access Token and Refresh Token with custom scopes."
+    />
+    <meta
+      name="twitter:image"
+      content="https://twitchtokentool.click/images/icons/favicon-16x16.png"
+    />
   </head>
   <body>
     <!-- Navbar -->
