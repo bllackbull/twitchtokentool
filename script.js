@@ -73,169 +73,228 @@ document.addEventListener("DOMContentLoaded", function () {
   refreshInputs.forEach((input) =>
     input.addEventListener("input", checkRefreshInputs)
   );
-});
 
-const redirectUri = "https://twitchtokentool.click";
+  const redirectUri = "https://twitchtokentool.click";
 
-// Generate Token
-generateBtn.addEventListener("click", function () {
-  const clientId = document.querySelector(".client-id").value;
-  const clientSecret = document.querySelector(".client-secret").value;
+  // Generate Token
+  generateBtn.addEventListener("click", function () {
+    const clientId = document.querySelector(".client-id").value;
+    const clientSecret = document.querySelector(".client-secret").value;
 
-  if (!clientId || !clientSecret) {
-    alert("⚠️ Please enter both Client ID and Client Secret.");
-    return;
-  }
+    if (!clientId || !clientSecret) {
+      alert("⚠️ Please enter both Client ID and Client Secret.");
+      return;
+    }
 
-  localStorage.setItem("clientId", clientId);
-  localStorage.setItem("clientSecret", clientSecret);
+    localStorage.setItem("clientId", clientId);
+    localStorage.setItem("clientSecret", clientSecret);
 
-  const encodedRedirectUri = encodeURIComponent(window.location.origin);
-  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodedRedirectUri}&response_type=code`;
+    const selectedScopes =
+      JSON.parse(localStorage.getItem("selectedScopes")) || [];
+    const scopeString = selectedScopes.join(" ");
 
-  window.location.href = authUrl;
-});
+    const encodedRedirectUri = encodeURIComponent(window.location.origin);
+    const encodedScopes = encodeURIComponent(scopeString);
 
-async function generateToken(code) {
-  const clientId = localStorage.getItem("clientId");
-  const clientSecret = localStorage.getItem("clientSecret");
+    const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodedRedirectUri}&response_type=code&scope=${encodedScopes}`;
 
-  if (!clientId || !clientSecret) {
-    alert("⚠️ Please enter both Client ID and Client Secret.");
-    return;
-  }
-
-  const tokenUrl = "https://id.twitch.tv/oauth2/token";
-  const params = new URLSearchParams({
-    client_id: clientId,
-    client_secret: clientSecret,
-    code,
-    grant_type: "authorization_code",
-    redirect_uri: redirectUri,
+    window.location.href = authUrl;
   });
 
-  try {
-    const response = await fetch(tokenUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params,
+  async function generateToken(code) {
+    const clientId = localStorage.getItem("clientId");
+    const clientSecret = localStorage.getItem("clientSecret");
+
+    if (!clientId || !clientSecret) {
+      alert("⚠️ Please enter both Client ID and Client Secret.");
+      return;
+    }
+
+    const tokenUrl = "https://id.twitch.tv/oauth2/token";
+    const params = new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      code,
+      grant_type: "authorization_code",
+      redirect_uri: redirectUri,
     });
 
-    const data = await response.json();
+    try {
+      const response = await fetch(tokenUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+      });
 
-    showTokenModal(
-      "Token Successfully Generated!",
-      "Make sure to store these somewhere and keep them safe.",
-      data.access_token,
-      data.refresh_token
-    );
+      const data = await response.json();
 
-    await fetch("https://api.twitchtokentool.click/store", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: data.refresh_token,
-      }),
-    });
+      showTokenModal(
+        "Token Successfully Generated!",
+        "Make sure to store these somewhere and keep them safe.",
+        data.access_token,
+        data.refresh_token
+      );
 
-    localStorage.removeItem("clientId");
-    localStorage.removeItem("clientSecret");
-  } catch (error) {
-    console.error("Error fetching token:", error);
+      await fetch("https://api.twitchtokentool.click/store", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_id: clientId,
+          client_secret: clientSecret,
+          refresh_token: data.refresh_token,
+        }),
+      });
 
-    alert("❌ Failed to generate a token! Please try again later.");
-  }
-}
+      localStorage.removeItem("clientId");
+      localStorage.removeItem("clientSecret");
+      localStorage.removeItem("selectedScopes");
+    } catch (error) {
+      console.error("Error fetching token:", error);
 
-// Check if there's a code in the URL and process it
-const urlParams = new URLSearchParams(window.location.search);
-const authCode = urlParams.get("code");
-
-if (authCode) {
-  generateToken(authCode);
-}
-
-// Refresh Token
-refreshBtn.addEventListener("click", async function () {
-  const refreshToken = document.querySelector(".client-refresh").value;
-
-  if (!refreshToken) {
-    alert("⚠️ Please enter a refresh token.");
-    return;
+      alert("❌ Failed to generate a token! Please try again later.");
+    }
   }
 
-  try {
-    const response = await fetch(
-      `https://api.twitchtokentool.click/refresh/${encodeURIComponent(
-        refreshToken
-      )}`
-    );
+  // Check if there's a code in the URL and process it
+  const urlParams = new URLSearchParams(window.location.search);
+  const authCode = urlParams.get("code");
 
-    const data = await response.json();
-
-    showTokenModal(
-      "Token Refreshed!",
-      "Your access token has been refreshed. Make sure to store them somewhere safe.",
-      data.access_token,
-      data.refresh_token
-    );
-  } catch (error) {
-    console.error("Error refreshing token:", error);
-
-    alert("❌ Error connecting to server.");
+  if (authCode) {
+    generateToken(authCode);
   }
-});
 
-// Model handle
-const tokenModal = new bootstrap.Modal(document.getElementById("tokenModal"));
-const doneButton = document.getElementById("doneButton");
-let copiedAccess = false,
-  copiedRefresh = false;
+  // Refresh Token
+  refreshBtn.addEventListener("click", async function () {
+    const refreshToken = document.querySelector(".client-refresh").value;
 
-// Function to show modal with token values
-function showTokenModal(title, description, accessToken, refreshToken) {
-  document.getElementById("tokenModalLabel").textContent = title;
-  document.getElementById("modalDescription").textContent = description;
-  document.getElementById("accessToken").value = accessToken;
-  document.getElementById("refreshToken").value = refreshToken;
+    if (!refreshToken) {
+      alert("⚠️ Please enter a refresh token.");
+      return;
+    }
 
-  copiedAccess = false;
-  copiedRefresh = false;
-  doneButton.disabled = true;
+    try {
+      const response = await fetch(
+        `https://api.twitchtokentool.click/refresh/${encodeURIComponent(
+          refreshToken
+        )}`
+      );
 
-  tokenModal.show();
-}
+      const data = await response.json();
 
-// Copy button functionality
-document.querySelectorAll(".copy-btn").forEach((button) => {
-  button.addEventListener("click", function () {
-    const targetId = this.getAttribute("data-target");
-    const targetInput = document.getElementById(targetId);
+      showTokenModal(
+        "Token Refreshed!",
+        "Your access token has been refreshed. Make sure to store them somewhere safe.",
+        data.access_token,
+        data.refresh_token
+      );
+    } catch (error) {
+      console.error("Error refreshing token:", error);
 
-    navigator.clipboard.writeText(targetInput.value).then(() => {
-      this.textContent = "Copied!";
-      this.classList.add("btn-success");
+      alert("❌ Error connecting to server.");
+    }
+  });
 
-      if (targetId === "accessToken") copiedAccess = true;
-      if (targetId === "refreshToken") copiedRefresh = true;
+  // Model handle
+  const tokenModal = new bootstrap.Modal(document.getElementById("tokenModal"));
+  const doneButton = document.getElementById("doneButton");
+  let copiedAccess = false,
+    copiedRefresh = false;
 
-      // Enable the "Done" button only if both are copied
-      if (copiedAccess && copiedRefresh) {
-        doneButton.disabled = false;
-      }
+  // Function to show modal with token values
+  function showTokenModal(title, description, accessToken, refreshToken) {
+    document.getElementById("tokenModalLabel").textContent = title;
+    document.getElementById("modalDescription").textContent = description;
+    document.getElementById("accessToken").value = accessToken;
+    document.getElementById("refreshToken").value = refreshToken;
 
-      // Reset button text after a delay
-      setTimeout(() => {
-        this.textContent = "Copy";
-        this.classList.remove("btn-success");
-      }, 2000);
+    copiedAccess = false;
+    copiedRefresh = false;
+    doneButton.disabled = true;
+
+    tokenModal.show();
+  }
+
+  // Copy button functionality
+  document.querySelectorAll(".copy-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const targetId = this.getAttribute("data-target");
+      const targetInput = document.getElementById(targetId);
+
+      navigator.clipboard.writeText(targetInput.value).then(() => {
+        this.textContent = "Copied!";
+        this.classList.add("btn-success");
+
+        if (targetId === "accessToken") copiedAccess = true;
+        if (targetId === "refreshToken") copiedRefresh = true;
+
+        // Enable the "Done" button only if both are copied
+        if (copiedAccess && copiedRefresh) {
+          doneButton.disabled = false;
+        }
+
+        // Reset button text after a delay
+        setTimeout(() => {
+          this.textContent = "Copy";
+          this.classList.remove("btn-success");
+        }, 2000);
+      });
     });
   });
-});
 
-// Close modal on "Done" button click
-doneButton.addEventListener("click", function () {
-  tokenModal.hide();
+  // Close modal on "Done" button click
+  doneButton.addEventListener("click", function () {
+    tokenModal.hide();
+  });
+
+  // Configure Scopes Modal
+  function populateScopesTable() {
+    const tableBody = document.getElementById("scopesTableBody");
+    tableBody.innerHTML = "";
+
+    fetch("./scopes.json")
+      .then((response) => response.json())
+      .then((scopes) => {
+        scopes.forEach((scope) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+          <td>${scope.name}</td>
+          <td>${scope.description}</td>
+          <td>
+            <input type="checkbox" class="scope-checkbox" value="${scope.name}">
+          </td>
+        `;
+
+          tableBody.appendChild(row);
+        });
+      });
+  }
+
+  // Store Selected Scopes and Apply them
+  document.getElementById("applyScopes").addEventListener("click", () => {
+    const selectedScopes = Array.from(
+      document.querySelectorAll(".scope-checkbox:checked")
+    ).map((checkbox) => checkbox.value);
+
+    localStorage.setItem("selectedScopes", JSON.stringify(selectedScopes));
+
+    document.getElementById("selectAll").checked = false;
+  });
+
+  // Run this when modal opens
+  document
+    .getElementById("scopesModal")
+    .addEventListener("show.bs.modal", () => {
+      populateScopesTable();
+
+      // Select/Deselect All checkboxes
+      const selectAll = document.getElementById("selectAll");
+      const checkboxes = document.querySelectorAll(".scope-checkbox");
+
+      selectAll.addEventListener("change", () => {
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = selectAll.checked;
+        });
+      });
+    });
 });

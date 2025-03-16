@@ -93,6 +93,25 @@ body {
   opacity: 80%;
 }
 
+.secondary {
+  background-color: none;
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.secondary:hover {
+  background-color: var(--purple);
+  color: white;
+}
+
+.btn:disabled,
+.disabled {
+  background-color: var(--purple);
+  border: none;
+  opacity: 50%;
+  cursor: not-allowed;
+}
+
 /* Section Spacing */
 section {
   padding: 150px 0;
@@ -124,12 +143,9 @@ h3 {
   border-color: lightskyblue;
 }
 
-.btn:disabled,
-.disabled {
+.table th {
   background-color: var(--purple);
-  border: none;
-  opacity: 50%;
-  cursor: not-allowed;
+  color: white;
 }
 
 /* Footer */

@@ -1,0 +1,294 @@
+[
+  {
+    "name": "analytics:read:extensions",
+    "description": "View analytics data for the Twitch Extensions owned by the authenticated account."
+  },
+  {
+    "name": "analytics:read:games",
+    "description": "View analytics data for the games owned by the authenticated account."
+  },
+  {
+    "name": "bits:read",
+    "description": "View Bits information for a channel."
+  },
+  {
+    "name": "channel:bot",
+    "description": "Joins your channel's chatroom as a bot user, and perform chat-related actions as that user."
+  },
+  {
+    "name": "channel:manage:ads",
+    "description": "Manage ads schedule on a channel."
+  },
+  {
+    "name": "channel:read:ads",
+    "description": "Read the ads schedule and details on your channel."
+  },
+  {
+    "name": "channel:manage:broadcast",
+    "description": "Manage a channel's broadcast configuration, including updating channel configuration and managing stream markers and stream tags."
+  },
+  {
+    "name": "channel:read:charity",
+    "description": "Read charity campaign details and user donations on your channel."
+  },
+  {
+    "name": "channel:edit:commercial",
+    "description": "Run commercials on a channel."
+  },
+  {
+    "name": "channel:read:editors",
+    "description": "View a list of users with the editor role for a channel."
+  },
+  {
+    "name": "channel:manage:extensions",
+    "description": "Manage a channel's Extension configuration, including activating Extensions."
+  },
+  {
+    "name": "channel:read:goals",
+    "description": "View Creator Goals for a channel."
+  },
+  {
+    "name": "channel:read:guest_star",
+    "description": "Read Guest Star details for your channel."
+  },
+  {
+    "name": "channel:manage:guest_star",
+    "description": "Manage Guest Star for your channel."
+  },
+  {
+    "name": "channel:read:hype_train",
+    "description": "View Hype Train information for a channel."
+  },
+  {
+    "name": "channel:manage:moderators",
+    "description": "Add or remove the moderator role from users in your channel."
+  },
+  {
+    "name": "channel:read:polls",
+    "description": "View a channel's polls."
+  },
+  {
+    "name": "channel:manage:polls",
+    "description": "Manage a channel's polls."
+  },
+  {
+    "name": "channel:read:predictions",
+    "description": "View a channel's Channel Points Predictions."
+  },
+  {
+    "name": "channel:manage:predictions",
+    "description": "Manage of channel's Channel Points Predictions"
+  },
+  {
+    "name": "channel:manage:raids",
+    "description": "Manage a channel raiding another channel."
+  },
+  {
+    "name": "channel:read:redemptions",
+    "description": "View Channel Points custom rewards and their redemptions on a channel."
+  },
+  {
+    "name": "channel:manage:schedule",
+    "description": "Manage a channel's stream schedule."
+  },
+  {
+    "name": "channel:read:stream_key",
+    "description": "View an authorized user's stream key."
+  },
+  {
+    "name": "channel:read:subscriptions",
+    "description": "View a list of all subscribers to a channel and check if a user is subscribed to a channel."
+  },
+  {
+    "name": "channel:manage:videos",
+    "description": "Manage a channel's videos, including deleting videos."
+  },
+  {
+    "name": "channel:read:vips",
+    "description": "Read the list of VIPs in your channel."
+  },
+  {
+    "name": "channel:manage:vips",
+    "description": "Add or remove the VIP role from users in your channel."
+  },
+  {
+    "name": "channel:moderate",
+    "description": "Perform moderation actions in a channel."
+  },
+  {
+    "name": "clips:edit",
+    "description": "Manage Clips for a channel."
+  },
+  {
+    "name": "moderation:read",
+    "description": "View a channel's moderation data including Moderators, Bans, Timeouts, and Automod settings."
+  },
+  {
+    "name": "moderator:manage:announcements",
+    "description": "Send announcements in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:manage:automod",
+    "description": "Manage messages held for review by AutoMod in channels where you are a moderator."
+  },
+  {
+    "name": "moderator:read:automod_settings",
+    "description": "View a broadcaster's AutoMod settings."
+  },
+  {
+    "name": "moderator:manage:automod_settings",
+    "description": "Manage a broadcaster's AutoMod settings."
+  },
+  {
+    "name": "moderator:read:banned_users",
+    "description": "Read the list of bans or unbans in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:manage:banned_users",
+    "description": "Ban and unban users."
+  },
+  {
+    "name": "moderator:read:blocked_terms",
+    "description": "View a broadcaster's list of blocked terms."
+  },
+  {
+    "name": "moderator:read:chat_messages",
+    "description": "Read deleted chat messages in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:manage:blocked_terms",
+    "description": "Manage a broadcaster's list of blocked terms."
+  },
+  {
+    "name": "moderator:read:chat_settings",
+    "description": "View a broadcaster's chat room settings."
+  },
+  {
+    "name": "moderator:manage:chat_settings",
+    "description": "Manage a broadcaster's chat room settings."
+  },
+  {
+    "name": "moderator:read:chatters",
+    "description": "View the chatters in a broadcaster's chat room."
+  },
+  {
+    "name": "moderator:read:followers",
+    "description": "Read the followers of a broadcaster."
+  },
+  {
+    "name": "moderator:read:guest_star",
+    "description": "Read Guest Star details for channels where you are a Guest Star moderator."
+  },
+  {
+    "name": "moderator:manage:guest_star",
+    "description": "Manage Guest Star for channels where you are a Guest Star moderator."
+  },
+  {
+    "name": "moderator:read:moderators",
+    "description": "Read the list of moderators in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:read:shield_mode",
+    "description": "View a broadcaster's Shield Mode status."
+  },
+  {
+    "name": "moderator:manage:shield_mode",
+    "description": "Manage a broadcaster's Shield Mode status."
+  },
+  {
+    "name": "moderator:read:shoutouts",
+    "description": "View a broadcaster's shoutouts."
+  },
+  {
+    "name": "moderator:manage:shoutouts",
+    "description": "Manage a broadcaster's shoutouts."
+  },
+  {
+    "name": "moderator:read:suspicious_users",
+    "description": "Read chat messages from suspicious users and see users flagged as suspicious in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:read:unban_requests",
+    "description": "View a broadcaster's unban requests."
+  },
+  {
+    "name": "moderator:manage:unban_requests",
+    "description": "Manage a broadcaster's unban requests."
+  },
+  {
+    "name": "moderator:read:vips",
+    "description": "Read the list of VIPs in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:read:warnings",
+    "description": "Read warnings in channels where you have the moderator role."
+  },
+  {
+    "name": "moderator:manage:warnings",
+    "description": "Warn users in channels where you have the moderator role."
+  },
+  {
+    "name": "user:bot",
+    "description": "Join a specified chat channel as your user and appear as a bot, and perform chat-related actions as your user."
+  },
+  {
+    "name": "user:edit",
+    "description": "Manage a user object."
+  },
+  {
+    "name": "user:edit:broadcast",
+    "description": "View and edit a user's broadcasting configuration, including Extension configurations."
+  },
+  {
+    "name": "user:read:blocked_users",
+    "description": "View the block list of a user."
+  },
+  {
+    "name": "user:manage:blocked_users",
+    "description": "Manage the block list of a user."
+  },
+  {
+    "name": "user:read:broadcast",
+    "description": "View a user's broadcasting configuration, including Extension configurations."
+  },
+  {
+    "name": "user:read:chat",
+    "description": "Receive chatroom messages and informational notifications relating to a channel's chatroom."
+  },
+  {
+    "name": "user:manage:chat_color",
+    "description": "Update the color used for the user's name in chat."
+  },
+  {
+    "name": "user:read:email",
+    "description": "View a user's email address."
+  },
+  {
+    "name": "user:read:emotes",
+    "description": "View emotes available to a user"
+  },
+  {
+    "name": "user:read:follows",
+    "description": "View the list of channels a user follows."
+  },
+  {
+    "name": "user:read:moderated_channels",
+    "description": "Read the list of channels you have moderator privileges in."
+  },
+  {
+    "name": "user:read:subscriptions",
+    "description": "View if an authorized user is subscribed to specific channels."
+  },
+  {
+    "name": "user:read:whispers",
+    "description": "Receive whispers sent to your user."
+  },
+  {
+    "name": "user:manage:whispers",
+    "description": "Receive whispers sent to your user, and send whispers on your user's behalf."
+  },
+  {
+    "name": "user:write:chat",
+    "description": "Send chat messages to a chatroom."
+  }
+]
