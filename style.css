@@ -98,7 +98,8 @@ section {
   padding: 150px 0;
 }
 
-h2 {
+h2,
+h3 {
   color: var(--purple);
 }
 
@@ -159,7 +160,7 @@ footer {
 /* Dark Mode */
 .dark-mode,
 .dark-mode #refresh,
-.dark-mode #tokenModal {
+.dark-mode .modal-content {
   background-color: #121212;
   color: #ffffff;
 }
