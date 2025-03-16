@@ -227,6 +227,74 @@
       </div>
     </section>
 
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="tokenModal"
+      tabindex="-1"
+      aria-labelledby="tokenModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tokenModalLabel">Token Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalDescription">Your tokens are generated successfully.</p>
+
+            <label for="accessToken" class="form-label">Access Token</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="accessToken"
+                class="form-control"
+                readonly
+              />
+              <button
+                class="btn btn-outline-primary copy-btn"
+                data-target="accessToken"
+              >
+                Copy
+              </button>
+            </div>
+
+            <label for="refreshToken" class="form-label">Refresh Token</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="refreshToken"
+                class="form-control"
+                readonly
+              />
+              <button
+                class="btn btn-outline-primary copy-btn"
+                data-target="refreshToken"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="doneButton"
+              class="btn btn-success"
+              disabled
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="text-white text-center py-4">
       <div class="container">

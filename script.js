@@ -122,14 +122,13 @@ async function generateToken(code) {
     });
 
     const data = await response.json();
-    const dataString = `- Access Token: ${data.access_token}\n- Refresh Token: ${data.refresh_token}`;
 
-    const message = `✅ Successfully Generated!\n${dataString}\nClick OK to copy to clipboard.`;
-
-    if (confirm(message)) {
-      await navigator.clipboard.writeText(dataString);
-      alert("📋 Text copied to clipboard!");
-    }
+    showTokenModal(
+      "Token Successfully Generated!",
+      "Make sure to store these somewhere and keep them safe.",
+      data.access_token,
+      data.refresh_token
+    );
 
     await fetch("https://api.twitchtokentool.click/store", {
       method: "POST",
@@ -176,20 +175,67 @@ refreshBtn.addEventListener("click", async function () {
 
     const data = await response.json();
 
-    const dataString = `- New Access Token: ${data.access_token}\n- New Refresh Token: ${data.refresh_token}`;
-
-    const message =
-      `✅ Access Token Refreshed!\n` +
-      dataString +
-      "\nClick OK to copy to clipboard.";
-
-    if (confirm(message)) {
-      await navigator.clipboard.writeText(dataString);
-      alert("📋 Text copied to clipboard!");
-    }
+    showTokenModal(
+      "Token Refreshed!",
+      "Your access token has been refreshed. Make sure to store them somewhere safe.",
+      data.access_token,
+      data.refresh_token
+    );
   } catch (error) {
     console.error("Error refreshing token:", error);
 
     alert("❌ Error connecting to server.");
   }
+});
+
+// Model handle
+const tokenModal = new bootstrap.Modal(document.getElementById("tokenModal"));
+const doneButton = document.getElementById("doneButton");
+let copiedAccess = false,
+  copiedRefresh = false;
+
+// Function to show modal with token values
+function showTokenModal(title, description, accessToken, refreshToken) {
+  document.getElementById("tokenModalLabel").textContent = title;
+  document.getElementById("modalDescription").textContent = description;
+  document.getElementById("accessToken").value = accessToken;
+  document.getElementById("refreshToken").value = refreshToken;
+
+  copiedAccess = false;
+  copiedRefresh = false;
+  doneButton.disabled = true;
+
+  tokenModal.show();
+}
+
+// Copy button functionality
+document.querySelectorAll(".copy-btn").forEach((button) => {
+  button.addEventListener("click", function () {
+    const targetId = this.getAttribute("data-target");
+    const targetInput = document.getElementById(targetId);
+
+    navigator.clipboard.writeText(targetInput.value).then(() => {
+      this.textContent = "Copied!";
+      this.classList.add("btn-success");
+
+      if (targetId === "accessToken") copiedAccess = true;
+      if (targetId === "refreshToken") copiedRefresh = true;
+
+      // Enable the "Done" button only if both are copied
+      if (copiedAccess && copiedRefresh) {
+        doneButton.disabled = false;
+      }
+
+      // Reset button text after a delay
+      setTimeout(() => {
+        this.textContent = "Copy";
+        this.classList.remove("btn-success");
+      }, 2000);
+    });
+  });
+});
+
+// Close modal on "Done" button click
+doneButton.addEventListener("click", function () {
+  tokenModal.hide();
 });
