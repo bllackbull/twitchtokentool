@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const copyIcon = document.getElementById(targetId + "Icon");
 
       navigator.clipboard.writeText(targetInput.value).then(() => {
-        copyIcon.classList.replace("fa-check", "fa-copy");
+        copyIcon.classList.replace("fa-copy", "fa-check");
 
         if (targetId === "accessToken") copiedAccess = true;
         if (targetId === "refreshToken") copiedRefresh = true;
@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Reset button text after a delay
         setTimeout(() => {
-          copyIcon.classList.replace("fa-copy", "fa-check");
+          copyIcon.classList.replace("fa-check", "fa-copy");
         }, 2000);
       });
     });
