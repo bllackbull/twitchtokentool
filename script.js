@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
       const targetId = this.getAttribute("data-target");
       const targetInput = document.getElementById(targetId);
-      const copyIcon = document.getElementById("copyIcon");
+      const copyIcon = document.getElementById(targetId);
 
       navigator.clipboard.writeText(targetInput.value).then(() => {
         copyIcon.classList.replace("fa-check", "fa-copy");
@@ -343,8 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Reset button text after a delay
         setTimeout(() => {
-          this.textContent = "Copy";
-          this.classList.remove("btn-success");
+          copyIcon.classList.replace("fa-copy", "fa-check");
         }, 2000);
       });
     });
