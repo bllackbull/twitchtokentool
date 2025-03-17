@@ -7,6 +7,7 @@ AOS.init({
 
 const generateBtn = document.querySelector(".generate");
 const refreshBtn = document.querySelector(".refresh");
+const validateBtn = document.querySelector(".validate");
 const revokeBtn = document.querySelector(".revoke");
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const title = document.getElementById("title");
   const inputs = document.querySelectorAll("#form-generate");
   const refreshInputs = document.querySelectorAll("#form-refresh");
+  const validateInputs = document.querySelectorAll("#form-validate");
   const revokeInputs = document.querySelectorAll("#form-revoke");
 
   // Check Dark Mode Preference
@@ -43,6 +45,35 @@ document.addEventListener("DOMContentLoaded", function () {
       backToTopButton.style.display = "block";
     } else {
       backToTopButton.style.display = "none";
+    }
+  });
+
+  // Mobile Menu dynamic icon
+  const menuToggle = document.getElementById("menuToggle");
+  const menuIcon = document.getElementById("menuIcon");
+  const navMenu = document.getElementById("navMenu");
+  const navbar = document.querySelector(".navbar");
+
+  menuToggle.addEventListener("click", function () {
+    if (navMenu.classList.contains("show")) {
+      menuIcon.classList.replace("fa-xmark", "fa-bars");
+    } else {
+      menuIcon.classList.replace("fa-bars", "fa-xmark");
+    }
+  });
+
+  navMenu.addEventListener("hidden.bs.collapse", function () {
+    menuIcon.classList.replace("fa-xmark", "fa-bars");
+  });
+
+  navMenu.addEventListener("shown.bs.collapse", function () {
+    menuIcon.classList.replace("fa-bars", "fa-xmark");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (event) {
+    if (!navbar.contains(event.target) && navMenu.classList.contains("show")) {
+      new bootstrap.Collapse(navMenu).hide();
     }
   });
 
@@ -74,6 +105,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   refreshInputs.forEach((input) =>
     input.addEventListener("input", checkRefreshInputs)
+  );
+
+  // Validate button disabled check
+  function checkValidateInputs() {
+    const allFilled = [...validateInputs].every(
+      (input) => input.value.trim() !== ""
+    );
+    validateBtn.disabled = !allFilled;
+  }
+
+  validateInputs.forEach((input) =>
+    input.addEventListener("input", checkValidateInputs)
   );
 
   // Revoke button disabled check
@@ -210,6 +253,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Validate Token
+  validateBtn.addEventListener("click", async function () {
+    const validateToken = document.querySelector(".validate-token").value;
+
+    if (!validateToken) {
+      alert("⚠️ Please enter a access token.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.twitchtokentool.click/validate/${encodeURIComponent(
+          validateToken
+        )}`
+      );
+
+      const data = await response.json();
+
+      showValidateModal(data);
+    } catch (error) {
+      console.error("Error validating token:", error);
+
+      alert("❌ Error connecting to server.");
+    }
+  });
+
   // Revoke Token
   revokeBtn.addEventListener("click", async function () {
     const revokeToken = document.querySelector(".revoke-token").value;
@@ -228,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       showRevokeModal();
     } catch (error) {
-      console.error("Error refreshing token:", error);
+      console.error("Error revoking token:", error);
 
       alert("❌ Error connecting to server.");
     }
@@ -261,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const targetInput = document.getElementById(targetId);
 
       navigator.clipboard.writeText(targetInput.value).then(() => {
-        this.textContent = "Copied!";
+        this.textContent = `<i class="fa-solid fa-check"></i>`;
         this.classList.add("btn-success");
 
         if (targetId === "accessToken") copiedAccess = true;
@@ -341,6 +410,20 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("show.bs.modal", () => {
       populateScopesTable();
     });
+
+  // Validate Modal
+  function showValidateModal(data) {
+    const validateModal = new bootstrap.Modal(
+      document.getElementById("validateModal")
+    );
+
+    document.getElementById("clientId").value = data.client_id;
+    document.getElementById("ownerName").value = data.login;
+    document.getElementById("scopes").value = data.scopes;
+    document.getElementById("expire").value = data.expires_in;
+
+    validateModal.show();
+  }
 
   // Revoke Modal
   function showRevokeModal() {

@@ -48,6 +48,10 @@ body {
   box-shadow: none;
 }
 
+#menuIcon {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
 /* Dark Mode Button */
 #darkModeToggle {
   width: 35px;
@@ -176,6 +180,7 @@ footer {
 /* Dark Mode */
 .dark-mode,
 .dark-mode #refresh,
+.dark-mode #revoke,
 .dark-mode .modal-content {
   background-color: #121212;
   color: #ffffff;
@@ -196,7 +201,7 @@ footer {
 }
 
 .dark-mode #generate,
-.dark-mode #revoke {
+.dark-mode #validate {
   background-color: #1a1a1a !important;
   color: #ffffff;
 }

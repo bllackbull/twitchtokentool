@@ -106,8 +106,9 @@
           aria-controls="navMenu"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          id="menuToggle"
         >
-          <i class="fas fa-bars fa-sm" style="color: white"></i>
+          <i id="menuIcon" class="fas fa-bars fa-sm" style="color: white"></i>
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto">
@@ -115,7 +116,10 @@
               <a class="nav-link text-white" href="#generate">Generate</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#refresh">Refresh Token</a>
+              <a class="nav-link text-white" href="#refresh">Refresh</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#validate">Validate</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#revoke">Revoke</a>
@@ -242,9 +246,43 @@
       </div>
     </section>
 
-    <!-- Revoke Token Section -->
-    <section id="revoke" class="bg-light">
+    <!-- Validate Token Section -->
+    <section id="validate" class="bg-light">
       <div class="container" data-aos="fade-right">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h2>Validate Token</h2>
+            <p>Provide your access token to get information about it.</p>
+            <p class="info box">
+              <i
+                class="fa-solid fa-circle-info"
+                style="color: darkcyan; margin-right: 5px"
+              ></i>
+              API:<strong
+                >https://api.twitchtokentool.click/validate/YOUR_ACCESS_TOKEN</strong
+              >
+            </p>
+          </div>
+          <div class="container col-md-4 p-3 mt-5">
+            <div class="text-center">
+              <input
+                type="text"
+                id="form-validate"
+                class="form-control mb-3 validate-token"
+                placeholder="Access Token"
+              />
+              <button class="validate btn primary text-white" disabled>
+                Validate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Revoke Token Section -->
+    <section id="revoke" class="bg-lighter">
+      <div class="container" data-aos="fade-left">
         <div class="row align-items-center">
           <div class="col-md-6">
             <h2>Revoke Token</h2>
@@ -278,68 +316,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="tokenModal"
-      tabindex="-1"
-      aria-labelledby="tokenModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="tokenModalLabel">Token Details</h3>
-          </div>
-          <div class="modal-body">
-            <p id="modalDescription">Your tokens are generated successfully.</p>
-
-            <label for="accessToken" class="form-label">Access Token:</label>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                id="accessToken"
-                class="form-control"
-                readonly
-              />
-              <button
-                class="btn secondary copy-btn text-white"
-                data-target="accessToken"
-              >
-                Copy
-              </button>
-            </div>
-
-            <label for="refreshToken" class="form-label">Refresh Token:</label>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                id="refreshToken"
-                class="form-control"
-                readonly
-              />
-              <button
-                class="btn secondary copy-btn text-white"
-                data-target="refreshToken"
-              >
-                Copy
-              </button>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              id="doneButton"
-              class="btn primary text-white"
-              disabled
-            >
-              Done
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Scopes Selection Modal -->
     <div
@@ -400,6 +376,114 @@
       </div>
     </div>
 
+    <!-- Generate / Refresh Modal -->
+    <div
+      class="modal fade"
+      id="tokenModal"
+      tabindex="-1"
+      aria-labelledby="tokenModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="tokenModalLabel">Token Details</h3>
+          </div>
+          <div class="modal-body">
+            <p id="modalDescription">Your tokens are generated successfully.</p>
+
+            <label for="accessToken" class="form-label">Access Token:</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="accessToken"
+                class="form-control"
+                readonly
+              />
+              <button
+                class="btn secondary copy-btn text-white"
+                data-target="accessToken"
+              >
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+
+            <label for="refreshToken" class="form-label">Refresh Token:</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="refreshToken"
+                class="form-control"
+                readonly
+              />
+              <button
+                class="btn secondary copy-btn text-white"
+                data-target="refreshToken"
+              >
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="doneButton"
+              class="btn primary text-white"
+              disabled
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validate Modal -->
+    <div
+      class="modal fade"
+      id="validateModal"
+      tabindex="-1"
+      aria-labelledby="validateModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="validateModalLabel">Validate Token</h3>
+          </div>
+          <div class="modal-body">
+            <p>Here are available informations about your token:</p>
+            <label for="clientId" class="form-label">Client ID:</label>
+            <div class="input-group mb-3">
+              <input type="text" id="clientId" class="form-control" readonly />
+            </div>
+            <label for="ownerName" class="form-label">Owner Name:</label>
+            <div class="input-group mb-3">
+              <input type="text" id="ownerName" class="form-control" readonly />
+            </div>
+            <label for="scopes" class="form-label">Scopes:</label>
+            <div class="input-group mb-3">
+              <input type="text" id="scopes" class="form-control" readonly />
+            </div>
+            <label for="expire" class="form-label">Expires in:</label>
+            <div class="input-group mb-3">
+              <input type="text" id="expire" class="form-control" readonly />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="doneButton"
+              class="btn primary text-white"
+              data-bs-dismiss="modal"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Revoke Modal -->
     <div
       class="modal fade"
@@ -443,7 +527,7 @@
             <i class="fa-solid fa-globe fa-lg"></i>
           </a>
           <a
-            href="https://github.com/bllackbull"
+            href="https://github.com/bllackbull/twitchtokentool"
             target="_blank"
             class="text-white mx-2"
           >
