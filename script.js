@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
       const targetId = this.getAttribute("data-target");
       const targetInput = document.getElementById(targetId);
-      const copyIcon = document.getElementById(targetId);
+      const copyIcon = document.getElementById(targetId + "Icon");
 
       navigator.clipboard.writeText(targetInput.value).then(() => {
         copyIcon.classList.replace("fa-check", "fa-copy");
