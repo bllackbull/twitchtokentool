@@ -328,10 +328,10 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
       const targetId = this.getAttribute("data-target");
       const targetInput = document.getElementById(targetId);
+      const copyIcon = document.getElementById("copyIcon");
 
       navigator.clipboard.writeText(targetInput.value).then(() => {
-        this.textContent = `<i class="fa-solid fa-check"></i>`;
-        this.classList.add("btn-success");
+        copyIcon.classList.replace("fa-check", "fa-copy");
 
         if (targetId === "accessToken") copiedAccess = true;
         if (targetId === "refreshToken") copiedRefresh = true;
