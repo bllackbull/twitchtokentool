@@ -195,7 +195,8 @@ footer {
   color: #ddd;
 }
 
-.dark-mode #generate {
+.dark-mode #generate,
+.dark-mode #revoke {
   background-color: #1a1a1a !important;
   color: #ffffff;
 }

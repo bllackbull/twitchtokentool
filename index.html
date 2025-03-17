@@ -117,6 +117,9 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="#refresh">Refresh Token</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#revoke">Revoke</a>
+            </li>
           </ul>
           <button id="darkModeToggle" class="btn text-white">
             <i id="darkModeIcon" class="fas fa-moon fa-sm"></i>
@@ -239,6 +242,43 @@
       </div>
     </section>
 
+    <!-- Revoke Token Section -->
+    <section id="revoke" class="bg-light">
+      <div class="container" data-aos="fade-right">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h2>Revoke Token</h2>
+            <p>
+              If you don't want to use your access token anymore, you can
+              provide it here to revoke it.
+            </p>
+            <p class="info box">
+              <i
+                class="fa-solid fa-circle-info"
+                style="color: darkcyan; margin-right: 5px"
+              ></i>
+              API:<strong
+                >https://api.twitchtokentool.click/revoke/YOUR_ACCESS_TOKEN</strong
+              >
+            </p>
+          </div>
+          <div class="container col-md-4 p-3 mt-5">
+            <div class="text-center">
+              <input
+                type="text"
+                id="form-revoke"
+                class="form-control mb-3 revoke-token"
+                placeholder="Access Token"
+              />
+              <button class="revoke btn primary text-white" disabled>
+                Revoke
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Modal -->
     <div
       class="modal fade"
@@ -354,6 +394,36 @@
               data-bs-dismiss="modal"
             >
               Apply
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revoke Modal -->
+    <div
+      class="modal fade"
+      id="revokeModal"
+      tabindex="-1"
+      aria-labelledby="revokeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="revokeModalLabel">Revoke Token</h3>
+          </div>
+          <div class="modal-body">
+            <p>Your access token has been revoked successfully.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="doneButton"
+              class="btn primary text-white"
+              data-bs-dismiss="modal"
+            >
+              Done
             </button>
           </div>
         </div>

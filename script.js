@@ -7,6 +7,7 @@ AOS.init({
 
 const generateBtn = document.querySelector(".generate");
 const refreshBtn = document.querySelector(".refresh");
+const revokeBtn = document.querySelector(".revoke");
 
 document.addEventListener("DOMContentLoaded", function () {
   const darkModeToggle = document.getElementById("darkModeToggle");
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const title = document.getElementById("title");
   const inputs = document.querySelectorAll("#form-generate");
   const refreshInputs = document.querySelectorAll("#form-refresh");
+  const revokeInputs = document.querySelectorAll("#form-revoke");
 
   // Check Dark Mode Preference
   if (localStorage.getItem("darkMode") === "enabled") {
@@ -74,6 +76,19 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener("input", checkRefreshInputs)
   );
 
+  // Revoke button disabled check
+  function checkRevokeInputs() {
+    const allFilled = [...revokeInputs].every(
+      (input) => input.value.trim() !== ""
+    );
+    revokeBtn.disabled = !allFilled;
+  }
+
+  revokeInputs.forEach((input) =>
+    input.addEventListener("input", checkRevokeInputs)
+  );
+
+  // Twitch Redirect URI
   const redirectUri = "https://twitchtokentool.click";
 
   // Generate Token
@@ -141,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify({
           client_id: clientId,
           client_secret: clientSecret,
+          access_token: data.access_token,
           refresh_token: data.refresh_token,
         }),
       });
@@ -187,6 +203,30 @@ document.addEventListener("DOMContentLoaded", function () {
         data.access_token,
         data.refresh_token
       );
+    } catch (error) {
+      console.error("Error refreshing token:", error);
+
+      alert("❌ Error connecting to server.");
+    }
+  });
+
+  // Revoke Token
+  revokeBtn.addEventListener("click", async function () {
+    const revokeToken = document.querySelector(".revoke-token").value;
+
+    if (!revokeToken) {
+      alert("⚠️ Please enter a access token.");
+      return;
+    }
+
+    try {
+      await fetch(
+        `https://api.twitchtokentool.click/revoke/${encodeURIComponent(
+          revokeToken
+        )}`
+      );
+
+      showRevokeModal();
     } catch (error) {
       console.error("Error refreshing token:", error);
 
@@ -267,6 +307,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
           tableBody.appendChild(row);
         });
+
+        selectAll();
       });
   }
 
@@ -281,20 +323,31 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("selectAll").checked = false;
   });
 
+  // Select/Deselect All checkboxes
+  function selectAll() {
+    const selectAll = document.getElementById("selectAll");
+    const checkboxes = document.querySelectorAll(".scope-checkbox");
+
+    selectAll.addEventListener("change", () => {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = selectAll.checked;
+      });
+    });
+  }
+
   // Run this when modal opens
   document
     .getElementById("scopesModal")
     .addEventListener("show.bs.modal", () => {
       populateScopesTable();
-
-      // Select/Deselect All checkboxes
-      const selectAll = document.getElementById("selectAll");
-      const checkboxes = document.querySelectorAll(".scope-checkbox");
-
-      selectAll.addEventListener("change", () => {
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = selectAll.checked;
-        });
-      });
     });
+
+  // Revoke Modal
+  function showRevokeModal() {
+    const revokeModal = new bootstrap.Modal(
+      document.getElementById("revokeModal")
+    );
+
+    revokeModal.show();
+  }
 });
