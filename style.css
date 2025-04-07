@@ -92,9 +92,12 @@ body {
   background-color: var(--purple);
 }
 
-.primary:hover {
-  background-color: var(--purple);
+.primary:hover,
+.primary:focus {
+  background-color: var(--purple) !important;
   opacity: 80%;
+  outline: none;
+  border-color: var(--purple) !important;
 }
 
 .secondary {
@@ -103,9 +106,13 @@ body {
   color: var(--purple);
 }
 
-.secondary:hover {
-  background-color: var(--purple);
-  color: white;
+.secondary:hover,
+.secondary:focus {
+  background-color: var(--purple) !important;
+  color: white !important;
+  opacity: 80%;
+  outline: none;
+  border-color: var(--purple) !important;
 }
 
 .btn:disabled,
@@ -169,7 +176,7 @@ input,
 }
 
 .table input[type="checkbox"]:hover {
-  opacity: 80%;
+  opacity: 50%;
 }
 
 /* Footer */
