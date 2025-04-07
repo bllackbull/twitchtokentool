@@ -1,7 +1,9 @@
 /* Global Styles */
 :root {
+  --light-purple: #d8bdff;
   --purple: #9146ff;
   --dark-purple: #7c3ade;
+  --yellow: #edd900;
 }
 
 html,
@@ -145,8 +147,8 @@ h3 {
 
 .warning {
   background-color: yellow;
-  color: #121212;
-  border-color: #edd900;
+  color: black;
+  border-color: var(--yellow);
 }
 
 .info {
@@ -177,6 +179,12 @@ input,
 
 .table input[type="checkbox"]:hover {
   opacity: 50%;
+}
+
+mark {
+  background-color: var(--light-purple);
+  border: 1px solid var(--purple);
+  border-radius: 4px;
 }
 
 /* Footer */

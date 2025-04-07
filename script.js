@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const row = document.createElement("tr");
 
           row.innerHTML = `
-          <td>${scope.name}</td>
+          <td><mark>${scope.name}</mark></td>
           <td>${scope.description}</td>
           <td>
             <input type="checkbox" class="scope-checkbox" value="${scope.name}">
