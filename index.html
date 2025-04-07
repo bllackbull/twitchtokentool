@@ -50,6 +50,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
       rel="stylesheet"
     />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Viga&display=swap"
+      rel="stylesheet"
+    />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./style.css" />
     <!-- Structured Data -->
@@ -140,9 +147,22 @@
           <p class="lead">
             Generate your own Twitch OAuth access token and refresh token.
           </p>
-          <a href="#generate" class="btn primary btn-lg text-white"
+          <a
+            href="#generate"
+            class="btn primary btn-lg text-white"
+            style="margin-right: 0.25rem"
             >Get Started</a
           >
+          <a
+            href="https://github.com/bllackbull/twitchtokentool?tab=readme-ov-file#1-create-your-twitch-app"
+            target="_blank"
+            class="btn secondary btn-lg guide"
+            >How to Use
+            <i
+              style="margin-left: 5px"
+              class="fas fa-up-right-from-square fa-sm"
+            ></i
+          ></a>
         </div>
         <div class="col-md-6 text-center">
           <img
@@ -492,7 +512,10 @@
             <h3 class="modal-title" id="revokeModalLabel">Revoke Token</h3>
           </div>
           <div class="modal-body">
-            <p>Your access token has been revoked successfully.</p>
+            <p>
+              Your access token has been revoked successfully and it's now
+              expired.
+            </p>
           </div>
           <div class="modal-footer">
             <button
@@ -528,11 +551,11 @@
             <i class="fab fa-github fa-lg"></i>
           </a>
           <a
-            href="https://www.linkedin.com/in/pouyakhalili/"
+            href="https://x.com/BlllackBull"
             target="_blank"
             class="text-white mx-2"
           >
-            <i class="fab fa-linkedin-in fa-lg"></i>
+            <i class="fab fa-x-twitter fa-lg"></i>
           </a>
           <a
             href="https://twitch.tv/blllackbull"
@@ -542,7 +565,9 @@
             <i class="fab fa-twitch fa-lg"></i>
           </a>
         </div>
-        <p class="mb-2">&copy; 2025 Pouya Khalili. All rights reserved.</p>
+        <p class="copyright mb-2">
+          &copy; 2025 Pouya Khalili. All rights reserved.
+        </p>
         <button id="backToTop" class="btn btn-outline-light">
           <i class="fas fa-arrow-up"></i>
         </button>

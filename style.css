@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Viga", sans-serif;
 }
 
 /* Navbar */
@@ -130,6 +130,7 @@ h3 {
   border-style: solid;
   border-width: 1px;
   border-radius: 8px;
+  font-family: sans-serif;
   font-size: 0.9rem;
   padding: 8px;
   overflow: hidden;
@@ -147,9 +148,28 @@ h3 {
   border-color: lightskyblue;
 }
 
+input,
+.table,
+.copyright {
+  font-family: sans-serif;
+}
+
 .table th {
   background-color: var(--purple);
   color: white;
+}
+
+.table input[type="checkbox"] {
+  width: 1rem;
+  min-width: 1rem;
+  height: 1rem;
+  min-height: 1rem;
+  margin-left: 1.25rem;
+  cursor: pointer;
+}
+
+.table input[type="checkbox"]:hover {
+  opacity: 80%;
 }
 
 /* Footer */
@@ -238,5 +258,11 @@ footer {
     .col-md-6:first-child
     .list-group-item:last-child {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  }
+}
+
+@media (max-width: 354px) {
+  .guide {
+    margin-top: 0.25rem;
   }
 }

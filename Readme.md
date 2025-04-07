@@ -1,4 +1,4 @@
-# <img src="./images/logo.png" href="https://twitchtokentool.click" style="cursor: pointer;"></img>
+# <img src="./images/logo.png" style="cursor: pointer;"></img>
 
 You can easily generate your own Twitch OAuth tokens with this tool. Here is a quick usage guide for you:
 
